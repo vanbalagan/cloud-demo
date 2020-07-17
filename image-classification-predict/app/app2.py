@@ -3,7 +3,7 @@ import os
 import json
 import boto3
 import tempfile
-import urllib2
+import urllib3
 
 import mxnet as mx
 import numpy as np
@@ -36,7 +36,7 @@ f_symbol_file = tempfile.NamedTemporaryFile()
 s3_client.download_file(bucket, f_symbol, f_symbol_file.name)
 f_symbol_file.flush()
 
-print f_symbol_file.name
+print (f_symbol_file.name)
 
 def load_model(s_fname, p_fname):
      """
@@ -60,7 +60,7 @@ def load_model(s_fname, p_fname):
      return symbol, arg_params, aux_params
 
 def predict(url, mod, synsets):
-     req = urllib2.urlopen(url)
+     req = urllib3.urlopen(url)
      arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
      cv2_img = cv2.imdecode(arr, -1)
      img = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
@@ -96,9 +96,9 @@ def index():
 
 @app.route('/image')
 def image():
-    print 'api'
+    print('api')
     url = request.args.get('image')
-    print url
+    print(url)
 
 
     sym, arg_params, aux_params = load_model(f_symbol_file.name, f_params_file.name)
