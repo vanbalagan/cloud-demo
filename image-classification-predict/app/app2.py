@@ -1,6 +1,4 @@
 #!/usr/bin/python
-import os
-import json
 import boto3
 import tempfile
 import urllib3
@@ -11,7 +9,7 @@ import cv2
 from collections import namedtuple
 from flask import Flask, Response
 from flask import request
-from flask import jsonify
+
 
 from botocore import UNSIGNED
 from botocore.config import Config
